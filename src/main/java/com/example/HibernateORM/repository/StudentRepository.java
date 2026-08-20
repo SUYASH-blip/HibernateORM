@@ -1,6 +1,6 @@
 package com.example.HibernateORM.repository;
 
-import com.example.HibernateORM.model.Student;
+import com.example.HibernateORM.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -21,8 +21,8 @@ public class StudentRepository {
     }
 
     //delete
-    public void remove(Long id){
-        entityManager.remove(id);
+    public void remove(Student studentToremove){
+        entityManager.remove(studentToremove);
     }
 
 }

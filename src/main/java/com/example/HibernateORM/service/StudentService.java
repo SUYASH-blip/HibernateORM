@@ -1,6 +1,6 @@
 package com.example.HibernateORM.service;
 
-import com.example.HibernateORM.model.Student;
+import com.example.HibernateORM.entity.Student;
 import com.example.HibernateORM.repository.StudentRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,16 @@ public class StudentService {
     }
 
     @Transactional
-    public void deleteStudent(Long id){
-        studentRepository.remove(id);
+    public void deleteStudent(Student studentToremove){
+        studentRepository.remove(studentToremove);
+    }
+
+    public Student updateStudent(Student studentreq ,Long id){
+        Student student1 = studentRepository.findById(id);
+        if(student1==null) throw new RuntimeException();
+        student1.setName(studentreq.getName());
+        student1.setAge(studentreq.getAge());
+        student1.setEmail(studentreq.getEmail());
+        return student1;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.HibernateORM.model;
+package com.example.HibernateORM.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
