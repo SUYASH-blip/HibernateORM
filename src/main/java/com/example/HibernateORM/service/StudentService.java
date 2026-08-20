@@ -19,8 +19,9 @@ public class StudentService {
     }
 
     @Transactional
-    public void getStudentById(Long id){
-        studentRepository.findById(id);
+    public Student getStudentById(Long id){
+      Student student = studentRepository.findById(id);
+      return student;
     }
 
     @Transactional
