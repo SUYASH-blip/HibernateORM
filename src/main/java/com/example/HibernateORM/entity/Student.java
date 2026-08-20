@@ -2,6 +2,10 @@ package com.example.HibernateORM.entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Entity
 @Table
 public class Student {
@@ -36,56 +40,117 @@ public class Student {
     )
         private int age;
 
+        @Column(precision = 5,scale = 2)
+        private BigDecimal percentage;
+
+        private LocalDate dateOfBirth;
+
+        private LocalDateTime createdAt;
+
+        @Enumerated(EnumType.STRING)
+        private StudentStatus status;
+
+        @Transient
+        private int marks;
+
+        @Convert(converter = BooleanToStringConverter.class)
+        private Boolean isMonitor;
+
         public Student(){}
 
-        public Student(String name, String email, int age) {
-            this.name = name;
-            this.email = email;
-            this.age = age;
-        }
-
-        public int getAge() {
-            return age;
-        }
-
-        public void setAge(int age) {
-            this.age = age;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public Long getId() {
-            return id;
-        }
-
-        public void setId(Long id) {
-            this.id = id;
-        }
-
-        @Override
-        public String toString() {
-            return "Students{" +
-                    "id=" + id +
-                    ", name='" + name + '\'' +
-                    ", email='" + email + '\'' +
-                    ", age=" + age +
-                    '}';
-        }
+    public Student(Long id, String name, String email, int age, BigDecimal percentage, LocalDate dateOfBirth, LocalDateTime createdAt, StudentStatus status, int marks, Boolean isMonitor) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.age = age;
+        this.percentage = percentage;
+        this.dateOfBirth = dateOfBirth;
+        this.createdAt = createdAt;
+        this.status = status;
+        this.marks = marks;
+        this.isMonitor = isMonitor;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public BigDecimal getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(BigDecimal percentage) {
+        this.percentage = percentage;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public StudentStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(StudentStatus status) {
+        this.status = status;
+    }
+
+    public int getMarks() {
+        return marks;
+    }
+
+    public void setMarks(int marks) {
+        this.marks = marks;
+    }
+
+    public Boolean getMonitor() {
+        return isMonitor;
+    }
+
+    public void setMonitor(Boolean monitor) {
+        isMonitor = monitor;
+    }
+}
 
 
 
