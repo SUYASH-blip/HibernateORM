@@ -37,6 +37,7 @@ public class StudentService {
         studentRepository.remove(studentToremove);
     }
 
+    @Transactional
     public Student updateStudent(Student studentreq ,Long id){
         Student student1 = studentRepository.findById(id);
         if(student1==null) throw new RuntimeException();

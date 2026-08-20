@@ -1,19 +1,39 @@
 package com.example.HibernateORM.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table
 public class Student {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
 
+        @Column(
+                name = "Student_Name",
+                unique = true,
+                length = 100,
+                nullable = false,
+                insertable = true,
+                updatable = true
+        )
         private String name;
+
+    @Column(
+            name = "Student_email",
+            unique = true,
+            nullable = false
+    )
         private String email;
+
+
+    @Column(
+            name = "Student_Age",
+            unique = false,
+            nullable = false,
+            length = 100
+    )
         private int age;
 
         public Student(){}
