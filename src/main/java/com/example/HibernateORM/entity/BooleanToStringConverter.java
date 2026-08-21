@@ -1,7 +1,9 @@
 package com.example.HibernateORM.entity;
 
 import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 
+@Converter
 public class BooleanToStringConverter implements AttributeConverter<Boolean,String> {
     @Override
     public String convertToDatabaseColumn(Boolean attribute) {

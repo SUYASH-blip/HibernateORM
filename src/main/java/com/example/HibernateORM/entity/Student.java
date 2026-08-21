@@ -10,26 +10,26 @@ import java.time.LocalDateTime;
 @Table
 public class Student {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-        @Column(
-                name = "Student_Name",
-                unique = true,
-                length = 100,
-                nullable = false,
-                insertable = true,
-                updatable = true
-        )
-        private String name;
+    @Column(
+            name = "Student_Name",
+            unique = true,
+            length = 100,
+            nullable = false,
+            insertable = true,
+            updatable = true
+    )
+    private String name;
 
     @Column(
             name = "Student_email",
             unique = true,
             nullable = false
     )
-        private String email;
+    private String email;
 
 
     @Column(
@@ -38,27 +38,62 @@ public class Student {
             nullable = false,
             length = 100
     )
-        private int age;
+    private int age;
 
-        @Column(precision = 5,scale = 2)
-        private BigDecimal percentage;
+    @Column(precision = 5, scale = 2)
+    private BigDecimal percentage;
 
-        private LocalDate dateOfBirth;
+    private LocalDate dateOfBirth;
 
-        private LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
-        @Enumerated(EnumType.STRING)
-        private StudentStatus status;
+    @Enumerated(EnumType.STRING)
+    private StudentStatus status;
 
-        @Transient
-        private int marks;
+    @Transient
+    private int marks;
 
-        @Convert(converter = BooleanToStringConverter.class)
-        private Boolean isMonitor;
+    @Convert(converter = BooleanToStringConverter.class)
+    private Boolean isMonitor;
 
-        public Student(){}
+    @Embedded
+    @AttributeOverride(
+            name = "pinCode",
+            column = @Column(name = "current_PinCode")
+    )
+    @AttributeOverride(
+            name = "streetNo",
+            column = @Column(name = "current_streetNo")
+    )
+    @AttributeOverride(
+            name = "housenumber",
+            column = @Column(name = "current_housenumber")
+    )
+    private Address currentaddress;
 
-    public Student(Long id, String name, String email, int age, BigDecimal percentage, LocalDate dateOfBirth, LocalDateTime createdAt, StudentStatus status, int marks, Boolean isMonitor) {
+    @Embedded
+    @AttributeOverride(
+            name = "pinCode",
+            column = @Column(name = "permanent_PinCode")
+    )
+    @AttributeOverride(
+            name = "streetNo",
+            column = @Column(name = "permanent_streetNo")
+    )
+    @AttributeOverride(
+            name = "housenumber",
+            column = @Column(name = "permanent_housenumber")
+    )
+    private Address permanentaddress;
+
+    public Student() {
+    }
+
+    public Student(Long id, String name, String email, int age,
+                   BigDecimal percentage, LocalDate dateOfBirth,
+                   LocalDateTime createdAt, StudentStatus status,
+                   int marks, Boolean isMonitor,
+                   Address currentaddress, Address permanentaddress) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -69,6 +104,8 @@ public class Student {
         this.status = status;
         this.marks = marks;
         this.isMonitor = isMonitor;
+        this.currentaddress = currentaddress;
+        this.permanentaddress = permanentaddress;
     }
 
     public Long getId() {
@@ -149,6 +186,22 @@ public class Student {
 
     public void setMonitor(Boolean monitor) {
         isMonitor = monitor;
+    }
+
+    public Address getCurrentaddress() {
+        return currentaddress;
+    }
+
+    public void setCurrentaddress(Address currentaddress) {
+        this.currentaddress = currentaddress;
+    }
+
+    public Address getPermanentaddress() {
+        return permanentaddress;
+    }
+
+    public void setPermanentaddress(Address permanentaddress) {
+        this.permanentaddress = permanentaddress;
     }
 }
 
